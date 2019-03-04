@@ -3,7 +3,6 @@
  */
 // export const RECEIVE_ADDRESS = 'receive_address' // 接收地址
 // export const RECEIVE_CATEGORYS = 'receive_categorys' // 接收食品分类数组
-
-
+export const RECEIVE_USER_DETAILS = 'receive_user_details'
 
 

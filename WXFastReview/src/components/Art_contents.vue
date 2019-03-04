@@ -1,12 +1,13 @@
 <template>
   <!-- Art_contents -->
   <div class="page-loadmore">
-    <!-- 
+    <!--
     <p class="page-loadmore-desc">translate : {{ translate }}</p>-->
     <!-- <div
         class="loading-background"
         :style="{ transform: 'scale3d(' + moveTranslate + ',' + moveTranslate + ',1)' }"
     >translateScale : {{ moveTranslate }}</div>-->
+    <!-- @click="itemClick" -->
     <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
       <mt-loadmore
         :top-method="loadTop"
@@ -15,13 +16,13 @@
         ref="loadmore"
       >
         <ul class="page-loadmore-list listData">
-          <li v-for="(item,index) in list" class="page-loadmore-listitem" :key="index">
+          <li v-for="(item,index) in list" class="page-loadmore-listitem" :key="index"  @click="$router.push('/detail')">
             <div class="xh">{{ index + 1 }}</div>
             <div class="des">
-              <div class="title">文字标题文字标题文字标题文字标题文字标题文字标题文字标题文字标题文字标题文字标题文字标题文字标题文字标题文字标题文字标题</div>
+              <div class="title">{{title}}</div>
               <div>
-                <span class="username">用户名</span>
-                <span class="sub_time">22:22</span>
+                <span class="username">{{username}}</span>
+                <span class="sub_time">{{sub_time}}</span>
               </div>
             </div>
           </li>
@@ -46,11 +47,18 @@ export default {
       topStatus: "",
       wrapperHeight: 0,
       translate: 0,
-      moveTranslate: 0
+      moveTranslate: 0,
+      title:'ces',
+      username:'ces',
+      sub_time:'sub_time',
     };
   },
 
   methods: {
+    itemClick(index){
+      alert(index);
+    },
+
     handleTopChange(status) {
       this.moveTranslate = 1;
       this.topStatus = status;

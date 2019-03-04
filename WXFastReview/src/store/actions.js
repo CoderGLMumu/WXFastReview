@@ -4,15 +4,42 @@
 import {
   // RECEIVE_ADDRESS,
   // RECEIVE_CATEGORYS,
+  RECEIVE_USER_DETAILS,
 
 } from './mutation-types'
 import {
-  // reqAddress,
-  // reqFoodCategorys,
-
+  req_simulated_logo,
+  req_user_details,
+  review_manuscript,
+  writing_manuscript,
+  // review_manuscript,
 } from '../api'
 
+
 export default {
+
+  // 异步模拟登陆
+  async getslogo({commit, state}) {
+    // 发送异步ajax请求
+    const result = await req_simulated_logo();
+
+    // 提交一个mutation
+    if (result.responseCode === 200) {
+    //  console.log(result.message, '')
+    }
+  },
+
+  async getuser_details({commit, state}) {
+    // 发送异步ajax请求
+    const result = await req_user_details();
+    // 提交一个mutation
+
+    if (result.responseCode === 200) {
+      const user_details = result.resultParm.resource
+      commit(RECEIVE_USER_DETAILS, {user_details})
+    }
+  },
+
   // 异步获取地址
   async getAddress({commit, state}) {
     // 发送异步ajax请求
@@ -52,6 +79,5 @@ export default {
   // recordUser({commit}, userInfo) {
   //   commit(RECEIVE_USER_INFO, {userInfo})
   // },
-
 
 }

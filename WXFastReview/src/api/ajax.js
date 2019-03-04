@@ -3,6 +3,11 @@ ajax请求函数模块
 返回值: promise对象(异步返回的数据是: response.data)
  */
 import axios from 'axios'
+
+window.Promise = Promise // 解决ie找不到Promise
+
+axios.defaults.withCredentials = true // 跨域带sension
+
 export default function ajax (url, data={}, type='GET') {
 
   return new Promise(function (resolve, reject) {

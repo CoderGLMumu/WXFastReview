@@ -3,9 +3,9 @@
     <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1218485516,264644399&fm=27&gp=0.jpg" alt="" srcset="">
 
     <!-- <span id='infoR'></span> -->
-    <span class='username'>斯嘉丽</span>
-    <span class='todayArt'>今日审核文章：xxxxx</span>
-    <span class='totolArt'>累计审核文章：xxxxx</span>
+    <span class='username'>{{username}}</span>
+    <span class='todayArt'>今日审核文章：{{todayArt}}</span>
+    <span class='totolArt'>累计审核文章：{{totolArt}}</span>
 
     <!-- UserInfo -->
   </div>
@@ -14,6 +14,13 @@
 <script>
   export default {
     name: 'UserInfo',
+    data() {
+      return {
+        username:'ces',
+        todayArt: 'ces',
+        totolArt: 'ces',
+      }
+    },
   }
 </script>
 
@@ -44,7 +51,7 @@
     font-size:14px;
     font-family:PingFangSC-Regular;
     font-weight:400;
-    color:rgba(31,49,74,1);
+    color:#999;
     line-height:20px;
   }
   .totolArt{
@@ -54,7 +61,7 @@
     font-size:14px;
     font-family:PingFangSC-Regular;
     font-weight:400;
-    color:rgba(31,49,74,1);
+    color:#999;
     line-height:20px;
     margin-left:1.25rem;
     margin-top: 5.8125rem;
