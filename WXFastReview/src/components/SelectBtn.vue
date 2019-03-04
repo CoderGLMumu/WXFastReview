@@ -1,53 +1,51 @@
 <template>
-
-  <div>
+  <div class="nav">
     <!-- SelectBtn -->
-    <span class='leftB'>待审核
-      <mt-badge type="error" color='red'>10</mt-badge>
-    </span>
+    <div class="leftB">待审核
+      <mt-badge type="error" color="#6665FF">10</mt-badge>
+    </div>
 
-    <span class='leftR'>已审核</span>
-
+    <div class="leftR">已审核</div>
   </div>
-
 </template>
 
 <script>
-
-import { Badge } from 'mint-ui';
-
-// Vue.component(Badge.name, Badge);
-
+import { Badge } from "mint-ui";
 
 export default {
-  name: 'SelectBtn',
+  name: "SelectBtn",
 
   components: {
     // Badge.name,
-    Badge,
-  },
-
-}
+    Badge
+  }
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.content{
+.content {
   position: flex;
 }
-.leftB{
-  width: 50%;
-  display: inline-block;
+.nav {
+  display: flex;
+}
+.leftB {
+  flex: 1;
   text-align: center;
+  height: 1.5625rem;
+  font-size: 18px;
+  font-family: PingFangSC-Regular;
+  font-weight: 400;
   /* vertical-align:top; */
-  position: relative;
 }
-.leftR{
-  width: 48%;
-  display: inline-block;
+.leftR {
+  flex: 1;
   text-align: center;
+  height: 1.5625rem;
+  font-size: 18px;
+  font-family: PingFangSC-Regular;
+  font-weight: 400;
   /* vertical-align: right; */
-  position: relative;
 }
-
 </style>

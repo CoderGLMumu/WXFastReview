@@ -37,4 +37,9 @@ export default {
   margin-top: 1.875rem;
 }
 
+.Art_contents{
+  margin-top: 1rem;
+}
+
+
 </style>
