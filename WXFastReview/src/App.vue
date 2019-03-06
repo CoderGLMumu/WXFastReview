@@ -24,19 +24,19 @@
   }
 
   .mint-msgbox-message {
-    margin-top: 0.6875rem;
-    height: 2.0625rem;
-    font-size: 1.5rem;
+    margin-top: 0.5875rem;
+    /* height: 55.0625rem; */
+    font-size: .64rem;
     font-family: PingFangSC-Medium;
     font-weight: 500;
-    line-height: 2.0625rem;
+    /* line-height: 1.05rem; */
   }
 
   .mint-msgbox {
-    width: 19.625rem;
-    height: 12.5rem;
+    width: 8.373333rem;
+    height: 5.333333rem;
     background: rgba(255, 255, 255, 1);
-    border-radius: 1.75rem;
+    border-radius: .85rem;
   }
 
   .mint-msgbox-title {
@@ -54,12 +54,12 @@
 
   .mint-msgbox-cancel {
     float: left;
-    width: 6.875rem;
-    height: 2.75rem;
+    width: 2.44rem;
+    height: 1.666667rem;
     position: absolute;
-    margin-top: 2.125rem;
-    margin-left: 10.375rem;
-    font-size: 1.125rem;
+    margin-top: 0.50rem;
+    margin-left: 4.8rem;
+    font-size: .58rem;
     font-family: PingFangSC-Medium;
     font-weight: 500;
     border: 0;
@@ -73,8 +73,8 @@
     background: rgba(102, 101, 255, 1);
     border-radius: 100px;
     position: absolute;
-    margin-top: 2.125rem;
-    margin-left: 2.9375rem;
+    margin-top: 0.725rem;
+    margin-left: 1.05rem;
     font-size: 18px;
     font-family: PingFangSC-Medium;
     font-weight: 500;
@@ -84,4 +84,5 @@
   .mint-msgbox-btns {
     float: left;
   }
+
 </style>

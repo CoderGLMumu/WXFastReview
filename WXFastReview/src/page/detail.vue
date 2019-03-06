@@ -8,7 +8,6 @@
         <!-- {{writing_manuscript.content}} -->
       </div>
     </div>
-
     <div class="detailbotBtn fl">
       <span class='btnL' @click="confirm(true)">审核通过</span>
       <span class='btnR' @click="confirm(false)">审核不通过</span>
@@ -56,6 +55,8 @@
             let manuscriptReview = {"pass":true,"special":false,"suggestion":"#","manuscriptId":this.$route.params.id}
             let isAuto = false
             this.$store.dispatch('get_review_manuscript',{manuscript:this.$route.params,manuscriptReview:manuscriptReview,isAuto:isAuto,callback:() => {
+
+              this.$router.push({name:'Article_list'})
               Toast('操作成功');
             }})
           });
@@ -84,6 +85,8 @@
             let manuscriptReview = {"pass":false,"special":false,"suggestion":"#","manuscriptId":this.$route.params.id}
             let isAuto = false
             this.$store.dispatch('get_review_manuscript',{manuscript:this.$route.params,manuscriptReview:manuscriptReview,isAuto:isAuto,callback:() => {
+
+              this.$router.push({name:'Article_list'})
               Toast('操作成功');
             }})
 
@@ -110,7 +113,7 @@
 
       mounted() {
 
-        this.$route.params
+        // this.$route.params
 
         this.$store.dispatch('get_writing_manuscript',this.$route.params.id)
       },
@@ -131,18 +134,20 @@
 
   .scroll {
     /* overflow: hidden; */
+    overflow-y: scroll;
+    height: 16.453333rem;
   }
 
   .container .detail-title {
     /* width: 188px; */
     /* height: 36px; */
-    font-size: 30px;
+    font-size: .8rem;
     font-family: Helvetica;
     color: rgba(31, 49, 74, 1);
-    line-height: 36px;
-    margin-top: 1.375rem;
-    margin-left: 1.875rem;
-    margin-right: 1.875rem;
+    line-height: .9rem;
+    margin-top: .586667rem;
+    margin-left: .8rem;
+    margin-right: .8rem;
 
   }
 
@@ -156,19 +161,22 @@
     /*隐藏滚轮*/
   }
 
-  .container .detailcontent {
-    overflow-y: scroll;
-    width: 293px;
+  .container  .detailcontent {
+
+    width: 8.513333rem;
     /* height: 527px; */
-    font-size: 19px;
+    font-size: .533333rem;
     font-family: PingFangSC-Regular;
     font-weight: 400;
     color: rgb(134, 134, 134);
-    line-height: 30px;
-    margin-top: 1.375rem;
-    margin-left: 1.875rem;
-    margin-right: 1.875rem;
+    /* line-height: .8rem; */
+    margin-top: .6rem;
+    margin-left: .8rem;
+    line-height: .9rem;
+    height: 17.786667rem;
+    /* bottom: .266667rem; */
     text-align: left;
+    /* height: 4rem; */
   }
 
   .fl {
@@ -179,7 +187,7 @@
     /* display: flex; */
     /* position: fixed; */
     width: 100%;
-    margin-top: 38.6875rem;
+    /* margin-top: 16.506667rem; */
     position: absolute;
   }
 
@@ -188,11 +196,11 @@
     width: 50%;
     position: flex;
     /* flex: 1; */
-    height: 3rem;
+    height: 1.28rem;
     background: rgba(102, 101, 255, 1);
     /* box-shadow:0px -1px 22px 0px rgba(52,84,122,0.08); */
     text-align: center;
-    line-height: 3rem;
+    line-height:  1.28rem;
     color: white;
     z-index: 99;
     font-size: 18px;
@@ -209,11 +217,11 @@
     font-family: PingFangSC-Medium;
     font-weight: 500;
     /* flex: 1; */
-    height: 3rem;
+    height:  1.28rem;
     background: #ccc;
     /* box-shadow:0px -1px 22px 0px rgba(52,84,122,1); */
     text-align: center;
-    line-height: 3rem;
+    line-height: 1.28rem;
     z-index: 99;
   }
 </style>

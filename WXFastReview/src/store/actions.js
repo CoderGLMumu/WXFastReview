@@ -85,10 +85,10 @@ export default {
 
   },
 
-  async get_review_manuscript({commit, state},{manuscript, manuscriptReview,isAuto,callback}) {
+  async get_review_manuscript2({commit, state},{manuscript, manuscriptReview,isAuto,callback}) {
 
     debugger
-    const result = await req_review_manuscript({manuscript, manuscriptReview,isAuto})
+    const result = await req_review_manuscript(manuscript, manuscriptReview,isAuto)
     if (result.responseCode === 200) {
 
       const review_manuscript = result.resultParm.resource
@@ -99,5 +99,18 @@ export default {
 
   },
 
+  async get_review_manuscript({commit, state},{manuscript, manuscriptReview,isAuto,callback}) {
+    JSON.
+    debugger
+    const result = await req_review_manuscript({manuscript:JSON.stringify(manuscript),manuscriptReview:JSON.stringify(manuscriptReview),isAuto:JSON.stringify(isAuto)})
+    if (result.responseCode === 200) {
+
+      const review_manuscript = result.resultParm.resource
+      commit(RECEIVE_REVIEW_MANUSCRIPT, {review_manuscript})
+      // 通知一下组件
+      callback && callback()
+    }
+
+  },
 
 }

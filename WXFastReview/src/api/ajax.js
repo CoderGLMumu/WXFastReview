@@ -32,16 +32,16 @@ export default function ajax (url, data={}, type='GET') {
 
       // 发送post请求
       debugger
-
+      var qs = require('qs');
       // let params = {_method:'put'}
       // let methods = 'post'
       // let conf = {url:url,methods:methods,params:params,data:data}
-      // promise = axios.post(url,data,
-      //   {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
-      // promise = axios.post(url,params, data)
+      promise = axios.post(url,qs.stringify(data),
+        {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
+      // promise = axios.post(url, data)
 
-      var qs = require('qs');
-      promise = axios.post(url, qs.stringify({"data": JSON.stringify(data)}))
+      // var qs = require('qs');
+      // promise = axios.post(url, qs.stringify(JSON.stringify(data)))
     }
     promise.then(function (response) {
       // 成功了调用resolve()

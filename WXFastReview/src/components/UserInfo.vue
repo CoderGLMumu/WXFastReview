@@ -39,8 +39,8 @@
     position: absolute;
     vertical-align: right;
     display: inline-block;
-    margin-left:1.25rem;
-    margin-top: 1.25rem;
+    margin-left:.533333rem;
+    margin-top: .533333rem;
     /* width:75px;
     height:36px; */
     font-size:25px;
@@ -53,8 +53,8 @@
     position: absolute;
     /* vertical-align: right; */
     display: inline-block;
-    margin-left:1.25rem;
-    margin-top: 4.1875rem;
+    margin-left:.533333rem;
+    margin-top: 1.786667rem;
     /* width:134px;
     height:20px; */
     font-size:14px;
@@ -65,15 +65,15 @@
   }
   .totolArt{
     position: absolute;
-    width:134px;
+    /* width:134px;.. */
     height:20px;
     font-size:14px;
     font-family:PingFangSC-Regular;
     font-weight:400;
     color:#999;
     line-height:20px;
-    margin-left:1.25rem;
-    margin-top: 5.8125rem;
+    margin-left:.533333rem;
+    margin-top: 2.48rem;
   }
 
 
@@ -81,13 +81,13 @@
     position: relative;
     vertical-align: top;
     /* display:inline-block; */
-    width: 6.25rem;
-    height: 6.25rem;
+    width: 2.666667rem;
+    height: 2.666667rem;
     overflow: hidden;
-    margin-left: 1.5625rem;
-    margin-top: .8125rem;
+    margin-left: .666667rem;
+    margin-top: .346667rem;
     border-radius:50%;
--moz-border-radius:50%;
+    -moz-border-radius:50%;
   }
   /* .myimg{
     display:inline;

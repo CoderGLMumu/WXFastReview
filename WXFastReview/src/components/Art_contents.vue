@@ -155,8 +155,8 @@ export default {
   white-space: nowrap;
 }
 .listData .des {
-  margin-left: 1.3125rem;
-  width: 17.9375rem;
+  margin-left: .666667rem;
+  width: 7.466667rem;
 }
 
 .listData .username {
@@ -168,33 +168,33 @@ export default {
 }
 
 .listData li{
-  margin-bottom: 1.875rem;
+  margin-bottom: .333333rem;
 }
 
 .listData .sub_time {
-  font-size: 15px;
+  font-size: .4rem;
   font-family: PingFangSC-Regular;
   font-weight: 400;
   color: rgba(31, 49, 74, 0.3);
-  line-height: 21px;
-  margin-left: .7rem;
+  line-height: .56rem;
+  margin-left: .533333rem;
 }
 .listData li {
   /* box-sizing: border-box; */
   overflow: hidden;
-  margin-left: 1.5625rem;
+  margin-left: .666667rem;
 }
 .listData li > div {
   float: left;
   /* box-sizing: border-box; */
 }
 .listData li .xh {
-  width: 9px;
-  height: 21px;
-  font-size: 18px;
+  width: .24rem;
+  height: .56rem;
+  font-size: .48rem;
   font-family: Helvetica;
   color: rgba(0, 0, 0, .5);
-  line-height: 28px;
+  line-height: .746667rem;
 }
 
 

@@ -59,13 +59,13 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .art_list_bg {
-    width: 23.4375rem;
-    height: 41.6875rem;
+    width: 10rem;
+    height: 17.786667rem;
     background: rgba(255, 255, 255, 1);
   }
 
   .SelectBtn {
-    margin-top: 1.875rem;
+    margin-top: .7rem;
     /* position:fixed; */
   }
 
@@ -74,7 +74,7 @@
   }
 
   .Art_contents {
-    margin-top: 1rem;
+    margin-top: .38rem;
     /* overflow: auto; */
   }
 </style>

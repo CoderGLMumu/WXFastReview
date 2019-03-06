@@ -76,7 +76,7 @@
   .leftL {
     flex: 1;
     text-align: center;
-    height: 1.5625rem;
+    height: .8rem;
     font-size: 18px;
     font-family: PingFangSC-Regular;
     font-weight: 400;
@@ -86,7 +86,7 @@
   .leftR {
     flex: 1;
     text-align: center;
-    height: 1.5625rem;;
+    height: .8rem;
     font-size: 18px;
     font-family: PingFangSC-Regular;
     font-weight: 400;
@@ -94,10 +94,10 @@
   }
 
   .bot-line {
-    width: 325px;
-    height: .125rem;
+    width: 8.666667rem;
+    height: .026667rem;
     background-color: rgba(0, 0, 0, .05);
     margin: auto;
-    margin-top: .3125rem;
+
   }
 </style>
