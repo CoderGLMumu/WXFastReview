@@ -1,11 +1,11 @@
 <template>
   <div class='art_list_bg no-bar'>
     <!-- userInfo -->
-    <UserInfo class="UserInfo" />
+    <UserInfo class="UserInfo" v-if="user_details.userName" />
     <!-- selectBtn -->
-    <SelectBtn class="SelectBtn" />
+    <SelectBtn class="SelectBtn" @selectClick = 'updateSelectData' v-if="user_details.userName" />
     <!-- Art_contents -->
-    <Art_contents class="Art_contents" />
+    <Art_contents class="Art_contents" :selectIndex = selectIndex v-if="manuscript_passing" />
   </div>
 </template>
 
@@ -15,7 +15,7 @@
   import UserInfo from '../components/UserInfo'
 
   import {
-    mapActions
+    mapState
   } from 'vuex'
 
   export default {
@@ -25,15 +25,33 @@
       SelectBtn,
       UserInfo
     },
-    mounted() {
-      this.getslogo();
-      setTimeout(() => {
-        this.getuser_details();
-      }, 1000);
-      // this.req_simulated_logo();
+
+    data() {
+      return {
+        selectIndex: 0,
+      }
     },
     methods: {
-      ...mapActions(['getuser_details','getslogo'])
+      updateSelectData(selectIndex){
+        this.selectIndex = selectIndex;
+      }
+    },
+    // mounted() {
+    //   // this.getslogo();
+    //   // setTimeout(() => {
+    //   //   this.getuser_details();
+    //   // }, 1000);
+    //   // this.req_simulated_logo();
+    // },
+    computed: {
+     ...mapState(['user_details','manuscript_pending_review','manuscript_passing'])
+    },
+    mounted () {
+      this.$store.dispatch('getslogo').then(this.$store.dispatch('getuser_details'))
+      let Parameter1 = {selectIndex : 0,pageNo:1,pageSize:99}
+      let Parameter2 = {selectIndex : 1,pageNo:1,pageSize:99}
+      this.$store.dispatch('get_manuscript',Parameter1)
+      this.$store.dispatch('get_manuscript',Parameter2)
     },
   }
 </script>
@@ -57,6 +75,6 @@
 
   .Art_contents {
     margin-top: 1rem;
-    overflow: auto;
+    /* overflow: auto; */
   }
 </style>

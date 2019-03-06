@@ -25,18 +25,18 @@
 
   .mint-msgbox-message {
     margin-top: 0.6875rem;
-    height: 33px;
-    font-size: 24px;
+    height: 2.0625rem;
+    font-size: 1.5rem;
     font-family: PingFangSC-Medium;
     font-weight: 500;
-    line-height: 33px;
+    line-height: 2.0625rem;
   }
 
   .mint-msgbox {
-    width: 314px;
-    height: 200px;
+    width: 19.625rem;
+    height: 12.5rem;
     background: rgba(255, 255, 255, 1);
-    border-radius: 28px;
+    border-radius: 1.75rem;
   }
 
   .mint-msgbox-title {
@@ -54,12 +54,12 @@
 
   .mint-msgbox-cancel {
     float: left;
-    width: 110px;
-    height: 44px;
+    width: 6.875rem;
+    height: 2.75rem;
     position: absolute;
     margin-top: 2.125rem;
     margin-left: 10.375rem;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-family: PingFangSC-Medium;
     font-weight: 500;
     border: 0;

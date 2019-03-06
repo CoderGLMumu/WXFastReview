@@ -1,9 +1,9 @@
 <template>
   <div class='UserInfo'>
-    <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1218485516,264644399&fm=27&gp=0.jpg" alt="" srcset="">
+    <img v-lazy="user_details.headPic" alt="" srcset="" v-if="user_details">
 
     <!-- <span id='infoR'></span> -->
-    <span class='username'>{{username}}</span>
+    <span class='username' >{{user_details.userName}}</span>
     <span class='todayArt'>今日审核文章：{{todayArt}}</span>
     <span class='totolArt'>累计审核文章：{{totolArt}}</span>
 
@@ -12,6 +12,10 @@
 </template>
 
 <script>
+  import {
+    mapState
+  } from 'vuex'
+
   export default {
     name: 'UserInfo',
     data() {
@@ -21,6 +25,11 @@
         totolArt: 'ces',
       }
     },
+
+    computed: {
+      ...mapState(['user_details'])
+    },
+
   }
 </script>
 

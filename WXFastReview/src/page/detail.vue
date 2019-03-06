@@ -1,34 +1,43 @@
 <template>
-  <div class='container'>
-    <div class="srcool">
+  <div class='container word-wrap'>
+    <div class="scroll">
       <div class='detail-title fl'>
-        Introduction
+        {{writing_manuscript.title}}
       </div>
-      <div class="detailcontent fl">
-        是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是
+      <div class="detailcontent fl" v-html='writing_manuscript.content'>
+        <!-- {{writing_manuscript.content}} -->
       </div>
     </div>
 
     <div class="detailbotBtn fl">
-      <span class='btnL' @click="confirm(true)">1111</span>
-      <span class='btnR' @click="confirm(false)">2222</span>
+      <span class='btnL' @click="confirm(true)">审核通过</span>
+      <span class='btnR' @click="confirm(false)">审核不通过</span>
     </div>
   </div>
 </template>
 
 <script>
   import {
-    MessageBox
+    MessageBox,
+    Toast,
   } from 'mint-ui';
+  import {
+    mapState
+  } from 'vuex';
 
   export default {
     name: 'Article_list',
+    data() {
+      return {
+        key: String
+      }
+    },
     components: {
 
     },
     methods: {
       confirm(isconfirm) {
-        let msgbox=document.getElementsByClassName("mint-msgbox-message")[0];
+           let msgbox=document.getElementsByClassName("mint-msgbox-message")[0];
           let innerTitle1=document.getElementsByClassName("innerTitle")[0];
           let innerTitle2=document.getElementsByClassName("innerTitle")[1];
           if (innerTitle1) {
@@ -42,7 +51,13 @@
             confirmButtonText:'确认',
             cancelButtonText:'点错了',
           }).then(action => {
-            console.log('suresuresure');
+            console.log('11111111111');
+            debugger
+            let manuscriptReview = {"pass":true,"special":false,"suggestion":"#","manuscriptId":this.$route.params.id}
+            let isAuto = false
+            this.$store.dispatch('get_review_manuscript',{manuscript:this.$route.params,manuscriptReview:manuscriptReview,isAuto:isAuto,callback:() => {
+              Toast('操作成功');
+            }})
           });
           setTimeout(() => {
             let msgbox=document.getElementsByClassName("mint-msgbox-message")[0];
@@ -64,7 +79,15 @@
             confirmButtonText:'确认',
             cancelButtonText:'点错了'
           }).then(action => {
-            console.log('suresuresure');
+            console.log('2222222222222222');
+            debugger
+            let manuscriptReview = {"pass":false,"special":false,"suggestion":"#","manuscriptId":this.$route.params.id}
+            let isAuto = false
+            this.$store.dispatch('get_review_manuscript',{manuscript:this.$route.params,manuscriptReview:manuscriptReview,isAuto:isAuto,callback:() => {
+              Toast('操作成功');
+            }})
+
+
           });
           setTimeout(() => {
             let msgbox=document.getElementsByClassName("mint-msgbox-message")[0];
@@ -82,8 +105,18 @@
           }
           }, 50);
         }
-      }
-    }
+      },
+    },
+
+      mounted() {
+
+        this.$route.params
+
+        this.$store.dispatch('get_writing_manuscript',this.$route.params.id)
+      },
+      computed: {
+        ...mapState(['writing_manuscript'])
+      },
   }
 </script>
 
@@ -96,13 +129,13 @@
     height: 100%; */
   }
 
-  .srcool {
-    /* overflow: auto; */
+  .scroll {
+    /* overflow: hidden; */
   }
 
   .container .detail-title {
-    width: 188px;
-    height: 36px;
+    /* width: 188px; */
+    /* height: 36px; */
     font-size: 30px;
     font-family: Helvetica;
     color: rgba(31, 49, 74, 1);
@@ -110,6 +143,12 @@
     margin-top: 1.375rem;
     margin-left: 1.875rem;
     margin-right: 1.875rem;
+
+  }
+
+  .word-wrap{
+    word-wrap:break-word;
+    word-break: break-all;
   }
 
   ::-webkit-scrollbar {
@@ -120,7 +159,7 @@
   .container .detailcontent {
     overflow-y: scroll;
     width: 293px;
-    height: 527px;
+    /* height: 527px; */
     font-size: 19px;
     font-family: PingFangSC-Regular;
     font-weight: 400;

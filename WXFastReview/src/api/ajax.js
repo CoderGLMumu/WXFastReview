@@ -8,6 +8,8 @@ window.Promise = Promise // 解决ie找不到Promise
 
 axios.defaults.withCredentials = true // 跨域带sension
 
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
+
 export default function ajax (url, data={}, type='GET') {
 
   return new Promise(function (resolve, reject) {
@@ -24,10 +26,22 @@ export default function ajax (url, data={}, type='GET') {
         url = url + '?' + dataStr
       }
       // 发送get请求
+
       promise = axios.get(url)
     } else {
+
       // 发送post请求
-      promise = axios.post(url, data)
+      debugger
+
+      // let params = {_method:'put'}
+      // let methods = 'post'
+      // let conf = {url:url,methods:methods,params:params,data:data}
+      // promise = axios.post(url,data,
+      //   {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
+      // promise = axios.post(url,params, data)
+
+      var qs = require('qs');
+      promise = axios.post(url, qs.stringify({"data": JSON.stringify(data)}))
     }
     promise.then(function (response) {
       // 成功了调用resolve()

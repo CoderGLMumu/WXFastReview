@@ -3,9 +3,9 @@
     <div class="nav">
       <!-- SelectBtn -->
       <div class="leftL" @click="leftLClick" :class=" selectIndex ? 'noselected' : 'selected' ">待审核
-        <mt-badge type="error" color="#6665FF">{{badgeNum}}</mt-badge>
+        <mt-badge type="error" color="#6665FF" v-if="manuscript_pending_review.items" >{{manuscript_pending_review.items.length}}</mt-badge>
       </div>
-
+<!-- manuscript.items.length -->
       <div class="leftR" @click="leftRClick" :class=" selectIndex ? 'selected' : 'noselected' ">已审核</div>
     </div>
     <div class='bot-line'>
@@ -18,6 +18,9 @@
   import {
     Badge
   } from "mint-ui";
+  import {
+    mapState
+  } from 'vuex'
 
   export default {
     name: "SelectBtn",
@@ -37,13 +40,17 @@
     methods: {
       leftLClick() {
         this.selectIndex = 0
+        this.$emit('selectClick',this.selectIndex)
       },
       leftRClick() {
         this.selectIndex = 1
+        this.$emit('selectClick',this.selectIndex)
       }
     },
 
-
+    computed: {
+    ...mapState(['manuscript_pending_review'])
+  },
   };
 </script>
 
