@@ -7,3 +7,4 @@ export const RECEIVE_MANUSCRIPT_PENDING_REVIEW = 'receive_manuscript_pending_rev
 export const RECEIVE_MANUSCRIPT_PASSING = 'receive_manuscript_passing'
 export const RECEIVE_WRITING_MANUSCRIPT = 'receive_writing_manuscript'
 export const RECEIVE_REVIEW_MANUSCRIPT = 'receive_review_manuscript'
+export const RECEIVE_REVIEW_COUNT = 'receive_review_count'

@@ -8,7 +8,7 @@
         <!-- {{writing_manuscript.content}} -->
       </div>
     </div>
-    <div class="detailbotBtn fl">
+    <div class="detailbotBtn fl" v-if="writing_manuscript.approvalStatus == '待审核'">
       <span class='btnL' @click="confirm(true)">审核通过</span>
       <span class='btnR' @click="confirm(false)">审核不通过</span>
     </div>
@@ -50,7 +50,7 @@
             confirmButtonText:'确认',
             cancelButtonText:'点错了',
           }).then(action => {
-            console.log('11111111111');
+            // console.log('11111111111');
             debugger
             let manuscriptReview = {"pass":true,"special":false,"suggestion":"#","manuscriptId":this.$route.params.id}
             let isAuto = false
@@ -80,7 +80,7 @@
             confirmButtonText:'确认',
             cancelButtonText:'点错了'
           }).then(action => {
-            console.log('2222222222222222');
+            // console.log('2222222222222222');
             debugger
             let manuscriptReview = {"pass":false,"special":false,"suggestion":"#","manuscriptId":this.$route.params.id}
             let isAuto = false
@@ -165,7 +165,7 @@
 
     width: 8.513333rem;
     /* height: 527px; */
-    font-size: .533333rem;
+    font-size: .433333rem;
     font-family: PingFangSC-Regular;
     font-weight: 400;
     color: rgb(134, 134, 134);
@@ -177,6 +177,10 @@
     /* bottom: .266667rem; */
     text-align: left;
     /* height: 4rem; */
+  }
+  .container  .detailcontent
+  {
+
   }
 
   .fl {
@@ -224,4 +228,6 @@
     line-height: 1.28rem;
     z-index: 99;
   }
+
+
 </style>

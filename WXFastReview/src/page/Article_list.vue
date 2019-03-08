@@ -48,8 +48,9 @@
     },
     mounted () {
       this.$store.dispatch('getslogo').then(this.$store.dispatch('getuser_details'))
-      let Parameter1 = {selectIndex : 0,pageNo:1,pageSize:99}
-      let Parameter2 = {selectIndex : 1,pageNo:1,pageSize:99}
+      .then(this.$store.dispatch('get_review_count'))
+      let Parameter1 = {selectIndex : 0,pageNo:1,pageSize:99,callback:() =>{}}
+      let Parameter2 = {selectIndex : 1,pageNo:1,pageSize:99,callback:() =>{}}
       this.$store.dispatch('get_manuscript',Parameter1)
       this.$store.dispatch('get_manuscript',Parameter2)
     },
@@ -74,7 +75,7 @@
   }
 
   .Art_contents {
-    margin-top: .38rem;
+    /* margin-top: .38rem; */
     /* overflow: auto; */
   }
 </style>

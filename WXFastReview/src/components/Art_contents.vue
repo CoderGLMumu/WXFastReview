@@ -1,201 +1,195 @@
 <template>
   <!-- Art_contents -->
-  <div class="page-loadmore">
-    <!--
-    <p class="page-loadmore-desc">translate : {{ translate }}</p>-->
-    <!-- <div
-        class="loading-background"
-        :style="{ transform: 'scale3d(' + moveTranslate + ',' + moveTranslate + ',1)' }"
-    >translateScale : {{ moveTranslate }}</div>-->
-    <!-- @click="itemClick" -->
-    <div class="page-loadmore-wrapper loadmore-srcoll" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
-      <mt-loadmore
-        :top-method="loadTop"
-        @translate-change="translateChange"
-        @top-status-change="handleTopChange"
-        :bottom-method="loadBottom"
-        @bottom-status-change="handleBottomChange"
-        :bottom-all-loaded="allLoaded"
-        ref="loadmore"
-      >
-        <ul class="page-loadmore-list listData">
-          <li v-for="(item,index) in !selectIndex ? manuscript_pending_review.items : manuscript_passing.items" class="page-loadmore-listitem" :key="index"  @click="$router.push({name:'detail',params:item})">
-            <div class="xh">{{ index + 1 }}</div>
-            <div class="des">
-              <div class="title">{{item.title}}</div>
-              <div>
-                <span class="username">{{!selectIndex ?item.mediumName : item.reviewer}}</span>
-                <span class="sub_time">{{!selectIndex ?item.createTime : item.reviewTime}}</span>
-              </div>
-            </div>
-          </li>
-        </ul>
-        <div slot="top" class="mint-loadmore-top">
-          <span v-show="topStatus !== 'loading'" :class="{ 'is-rotate': topStatus === 'drop' }">↓</span>
-          <span v-show="topStatus === 'loading'">
-            <mt-spinner type="snake"></mt-spinner>
-          </span>
+  <div >
+    <scroller :on-refresh="refresh" class="page-down listData" v-show="!selectIndex">
+      <div v-for="(item,index) in manuscript_pending_review.items" :key="index" @click="$router.push({name:'Detail',params:item})">
+
+        <div class="xh">{{ index + 1 }}</div>
+        <div class="des">
+          <div class="title">{{item.title}}</div>
+          <div>
+            <span class="username">{{item.mediumName}}</span>
+            <span class="sub_time">{{item.createTime}}</span>
+          </div>
         </div>
-      </mt-loadmore>
-    </div>
+      </div>
+    </scroller>
+
+    <scroller :on-refresh="refresh" class="page-down listData" v-show="selectIndex">
+      <div v-for="(item,index) in manuscript_passing.items" :key="index" @click="$router.push({name:'Detail',params:item})">
+
+        <div class="xh">{{ index + 1 }}</div>
+        <div class="des">
+          <div class="title">{{item.title}}</div>
+          <div>
+            <span class="username">{{item.mediumName}}</span>
+            <span class="sub_time">{{item.createTime}}</span>
+          </div>
+        </div>
+      </div>
+    </scroller>
+
   </div>
 </template>
 
 <script>
-import {
+  import Vue from 'vue'
+  import VueScroller from 'vue-scroller'
+  Vue.use(VueScroller)
+  import {
     mapState
   } from 'vuex'
-export default {
-  name: "Art_contents",
-  data() {
-    return {
-      list: [],
-      topStatus: "",
-      allLoaded: false,
-      bottomStatus: '',
-      wrapperHeight: 0,
-      translate: 0,
-      moveTranslate: 0,
-      title:'ces',
-      username:'ces',
-      sub_time:'sub_time',
-    };
-  },
-
-  props: {
-    selectIndex: Number
-  },
-
-  methods: {
-    itemClick(index){
-      alert(index);
-    },
-
-    handleTopChange(status) {
-        this.moveTranslate = 1;
-        this.topStatus = status;
-      },
-      translateChange(translate) {
-        const translateNum = +translate;
-        this.translate = translateNum.toFixed(2);
-        this.moveTranslate = (1 + translateNum / 70).toFixed(2);
-      },
-      loadTop() {
-        let manuscript = this.$store.state.manuscript
-        if (manuscript.items){
-          this.list = manuscript.items;
-          // for (let i = 1; i <= 10; i++) {
-          //   this.list.unshift(firstValue - i);
-          // }
-          if(this.$refs.loadmore){
-              this.$refs.loadmore.onTopLoaded();
-          }
-          // this.$refs.loadmore.onTopLoaded();
-        }
-
-
-      },
-    handleBottomChange(status) {
-        this.bottomStatus = status;
-      },
-    loadBottom() {
-        setTimeout(() => {
-          let lastValue = this.list[this.list.length - 1];
-          if (lastValue < 40) {
-            for (let i = 1; i <= 10; i++) {
-              this.list.push(lastValue + i);
-            }
-          } else {
-            this.allLoaded = true;
-          }
-          this.$refs.loadmore.onBottomLoaded();
-        }, 1500);
+  export default {
+    data() {
+      return {
+        items: []
       }
-  },
-
-  created() {
-    for (let i = 1; i <= 10; i++) {
-      this.list.push(i);
-    }
-  },
-
-  mounted() {
-
-    // this.$store.dispatch('get_manuscript',0,() => {
-    //
-    //   this.$nextTick(() => {
-    //
-    //     loadTop();
-    //   })
-    // })
-
-
-    this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
-  },
-  computed: {
-      ...mapState(['manuscript_pending_review','manuscript_passing']),
     },
-};
+    computed: {
+      ...mapState(['manuscript_pending_review', 'manuscript_passing']),
+    },
+    mounted() {
+
+      this.refresh()
+
+    },
+
+    props: {
+      selectIndex: Number
+    },
+
+    watch: {
+      selectIndex(newValue, oldValue) {
+        // this.$refs.loadmore.onTopLoaded()
+      },
+    },
+
+    created() {
+      // 不会引起DOM变化的数据在此定义
+
+    },
+
+    methods: {
+
+      // 加载刷新数据
+      async refresh() {
+        let Parameter
+        if (this.selectIndex == 0) {
+          Parameter = {
+            selectIndex: 0,
+            pageNo: 1,
+            pageSize: 99,
+            callback: () => {
+              if (this.$refs.loadmore) {
+                debugger
+                this.$refs.loadmore.onTopLoaded();
+              }
+            }
+          }
+        } else {
+          Parameter = {
+            selectIndex: 1,
+            pageNo: 1,
+            pageSize: 99,
+            callback: () => {
+              if (this.$refs.loadmore) {
+                debugger
+                this.$refs.loadmore.onTopLoaded();
+              }
+            }
+          }
+        }
+        debugger
+        this.$store.dispatch('get_manuscript', Parameter)
+      },
+    }
+  }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.loadmore-srcoll{
-  overflow: auto;
-}
-.listData .title {
-  margin-bottom: .375rem;
-  font-size: 18px;
-  font-family: PingFangSC-Regular;
-  font-weight: 400;
-  color: rgba(31, 49, 74, 1);
-  line-height: 26px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.listData .des {
-  margin-left: .666667rem;
-  width: 7.466667rem;
-}
+<style>
+  .page-down {
+    /* width: 100%;
+        height:100%; */
+    /* margin-top: 2.667rem; */
+     margin-top: 5.667rem;
+  }
 
-.listData .username {
-  font-size: 15px;
-  font-family: PingFangSC-Regular;
-  font-weight: 400;
-  color: rgba(31, 49, 74, 0.3);
-  line-height: 21px;
-}
+  .row {
+    height: 150px;
+    font-size: 16px;
+    line-height: 30px;
+    text-align: center;
+    color: #444;
+    background-color: #fff;
+  }
 
-.listData li{
-  margin-bottom: .333333rem;
-}
+  .grey-bg {
+    background-color: #eee;
+  }
 
-.listData .sub_time {
-  font-size: .4rem;
-  font-family: PingFangSC-Regular;
-  font-weight: 400;
-  color: rgba(31, 49, 74, 0.3);
-  line-height: .56rem;
-  margin-left: .533333rem;
-}
-.listData li {
-  /* box-sizing: border-box; */
-  overflow: hidden;
-  margin-left: .666667rem;
-}
-.listData li > div {
-  float: left;
-  /* box-sizing: border-box; */
-}
-.listData li .xh {
-  width: .24rem;
-  height: .56rem;
-  font-size: .48rem;
-  font-family: Helvetica;
-  color: rgba(0, 0, 0, .5);
-  line-height: .746667rem;
-}
+  .scrollerclass {
+    margin-top: 5rem;
+  }
 
+  .listData .title {
+    /* margin-bottom: .375rem; */
+    font-size: 0.48rem;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(31, 49, 74, 1);
+    /* line-height: 0.69rem; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-left: .833rem;
+  }
 
+  .listData {
+    line-height: 1rem;
+    flex-grow: 1;
+    margin-right: .8rem;
+    overflow: hidden;
+  }
+
+  .listData .des {
+     margin-right: .466667rem;
+        /* width: 7.466667rem; */
+  }
+
+  .listData .username {
+    font-size: 0.4rem;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(31, 49, 74, 0.3);
+    line-height: 0.56rem;
+    margin-left: .833rem;
+  }
+
+  .listData .sub_time {
+    font-size: .4rem;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(31, 49, 74, 0.3);
+    line-height: .56rem;
+    margin-left: .533333rem;
+  }
+
+  .listData >div {
+    /* float: left; */
+    /* box-sizing: border-box; */
+    margin-left: .533rem;
+  }
+
+  .listData .xh {
+    /* float: left; */
+    /* width: .24rem;
+          height: .56rem; */
+    position: absolute;
+    font-size: .48rem;
+    font-family: Helvetica;
+    color: rgba(0, 0, 0, .5);
+    margin-left: .133rem;
+    /* line-height: 0.68rem; */
+  }
 </style>
+

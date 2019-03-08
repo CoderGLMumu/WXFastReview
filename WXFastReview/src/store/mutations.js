@@ -8,6 +8,7 @@ import {
   RECEIVE_MANUSCRIPT_PASSING,
   RECEIVE_WRITING_MANUSCRIPT,
   RECEIVE_REVIEW_MANUSCRIPT,
+  RECEIVE_REVIEW_COUNT,
 } from './mutation-types'
 
 export default {
@@ -27,5 +28,10 @@ export default {
     [RECEIVE_REVIEW_MANUSCRIPT](state,{review_manuscript}){
       state.review_manuscript = review_manuscript
     },
+    [RECEIVE_REVIEW_COUNT](state,{review_count}){
+      state.review_count = review_count
+    },
+
+
 
 }

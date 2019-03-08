@@ -7,4 +7,5 @@ export default {
   manuscript_passing:{},
   writing_manuscript:{},
   review_manuscript:{},
+  review_count:{},
 }

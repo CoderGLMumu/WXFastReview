@@ -4,8 +4,8 @@
 
     <!-- <span id='infoR'></span> -->
     <span class='username' >{{user_details.userName}}</span>
-    <span class='todayArt'>今日审核文章：{{todayArt}}</span>
-    <span class='totolArt'>累计审核文章：{{totolArt}}</span>
+    <span class='todayArt' v-if="review_count">今日审核文章：{{review_count.todayReviewCount}}</span>
+    <span class='totolArt' v-if='review_count'>累计审核文章：{{review_count.totalReviewCount}}</span>
 
     <!-- UserInfo -->
   </div>
@@ -27,7 +27,7 @@
     },
 
     computed: {
-      ...mapState(['user_details'])
+      ...mapState(['user_details','review_count'])
     },
 
   }
@@ -37,17 +37,26 @@
 <style scoped>
   .username{
     position: absolute;
-    vertical-align: right;
-    display: inline-block;
+    /* vertical-align: right; */
+    /* display: inline-block; */
     margin-left:.533333rem;
     margin-top: .533333rem;
+    max-width: 6.133333rem;
+    /* margin-right: .133333rem; */
     /* width:75px;
     height:36px; */
-    font-size:25px;
+    font-size:0.67rem;
     font-family:PingFangSC-Regular;
     font-weight:400;
     color:rgba(31,49,74,1);
-    line-height:36px;
+    line-height:0.96rem;
+    /* text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden; */
+    /* display:block; */
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
   }
   .todayArt{
     position: absolute;
@@ -57,21 +66,21 @@
     margin-top: 1.786667rem;
     /* width:134px;
     height:20px; */
-    font-size:14px;
+    font-size:0.37rem;
     font-family:PingFangSC-Regular;
     font-weight:400;
     color:#999;
-    line-height:20px;
+    line-height:0.53rem;
   }
   .totolArt{
     position: absolute;
     /* width:134px;.. */
-    height:20px;
-    font-size:14px;
+
+    font-size:0.37rem;
     font-family:PingFangSC-Regular;
     font-weight:400;
     color:#999;
-    line-height:20px;
+    line-height:0.53rem;
     margin-left:.533333rem;
     margin-top: 2.48rem;
   }
@@ -81,8 +90,8 @@
     position: relative;
     vertical-align: top;
     /* display:inline-block; */
-    width: 2.666667rem;
-    height: 2.666667rem;
+    width:2.67rem;
+    height:2.67rem;
     overflow: hidden;
     margin-left: .666667rem;
     margin-top: .346667rem;

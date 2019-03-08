@@ -8,6 +8,7 @@ import {
   RECEIVE_USER_DETAILS,
   RECEIVE_WRITING_MANUSCRIPT,
   RECEIVE_REVIEW_MANUSCRIPT,
+  RECEIVE_REVIEW_COUNT,
 } from './mutation-types'
 import {
   req_simulated_logo,
@@ -15,6 +16,7 @@ import {
   req_manuscript,
   req_writing_manuscript,
   req_review_manuscript,
+  req_review_count,
 } from '../api'
 
 
@@ -41,6 +43,17 @@ export default {
     }
   },
 
+  async get_review_count({commit, state}) {
+    // 发送异步ajax请求
+    const result = await req_review_count();
+    // 提交一个mutation
+    debugger
+    if (result.responseCode === 200) {
+      const review_count = result.resultParm.resource
+      commit(RECEIVE_REVIEW_COUNT, {review_count})
+    }
+  },
+
   // 查询所有需要审核的稿件
   async get_manuscript({commit, state},Parameter) {
     // 发送异步ajax请求
@@ -52,8 +65,7 @@ export default {
     if (Parameter.selectIndex == 1) {
       manuscriptApprovalStatus = 'PASSING'
     }
-    //
-    // let manuscriptApprovalStatus = 'PENDING_REVIEW'
+
     let pageNo = Parameter.pageNo
     let pageSize = Parameter.pageSize
 
@@ -63,14 +75,16 @@ export default {
       if (Parameter.selectIndex == 0) {
         const manuscript_pending_review = result.resultParm.resource
         commit(RECEIVE_MANUSCRIPT_PENDING_REVIEW, {manuscript_pending_review})
+        Parameter.callback && Parameter.callback()
       }
       if (Parameter.selectIndex == 1) {
         const manuscript_passing = result.resultParm.resource
         commit(RECEIVE_MANUSCRIPT_PASSING, {manuscript_passing})
+        Parameter.callback && Parameter.callback()
       }
 
       // 数据更新了, 通知一下组件
-      // callback && callback()
+
     }
   },
 
@@ -87,7 +101,6 @@ export default {
 
   async get_review_manuscript2({commit, state},{manuscript, manuscriptReview,isAuto,callback}) {
 
-    debugger
     const result = await req_review_manuscript(manuscript, manuscriptReview,isAuto)
     if (result.responseCode === 200) {
 
@@ -100,8 +113,7 @@ export default {
   },
 
   async get_review_manuscript({commit, state},{manuscript, manuscriptReview,isAuto,callback}) {
-    JSON.
-    debugger
+
     const result = await req_review_manuscript({manuscript:JSON.stringify(manuscript),manuscriptReview:JSON.stringify(manuscriptReview),isAuto:JSON.stringify(isAuto)})
     if (result.responseCode === 200) {
 

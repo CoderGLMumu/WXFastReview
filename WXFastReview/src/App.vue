@@ -18,7 +18,8 @@
   }
 </script>
 
-<style>
+<style lang="less">
+ @import '../node_modules/vux/src/styles/reset.less';
   .mint-msgbox-content {
     border: 0;
   }

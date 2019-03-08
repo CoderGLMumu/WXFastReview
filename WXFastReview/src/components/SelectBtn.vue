@@ -3,7 +3,7 @@
     <div class="nav">
       <!-- SelectBtn -->
       <div class="leftL" @click="leftLClick" :class=" selectIndex ? 'noselected' : 'selected' ">待审核
-        <mt-badge type="error" color="#6665FF" v-if="manuscript_pending_review.items" >{{manuscript_pending_review.items.length}}</mt-badge>
+        <mt-badge class="badgeclass" type="error" color="#6665FF" v-if="manuscript_pending_review.items" >{{manuscript_pending_review.items.length}}</mt-badge>
       </div>
 <!-- manuscript.items.length -->
       <div class="leftR" @click="leftRClick" :class=" selectIndex ? 'selected' : 'noselected' ">已审核</div>
@@ -73,21 +73,31 @@
     color: #888;
   }
 
+  .badgeclass{
+    margin-left: .2rem;
+    line-height: .65rem;
+    height: .6rem;
+    width: .6rem;
+    font-size:0.48rem;
+  }
+
   .leftL {
     flex: 1;
     text-align: center;
-    height: .8rem;
-    font-size: 18px;
+    height: 1.5rem;
+    font-size:0.48rem;
     font-family: PingFangSC-Regular;
     font-weight: 400;
+    line-height: 1.2rem;
     /* vertical-align:top; */
   }
 
   .leftR {
     flex: 1;
     text-align: center;
-    height: .8rem;
-    font-size: 18px;
+    height: 1.5rem;
+    font-size:0.48rem;
+    line-height: 1.2rem;
     font-family: PingFangSC-Regular;
     font-weight: 400;
     /* vertical-align: right; */
@@ -98,6 +108,5 @@
     height: .026667rem;
     background-color: rgba(0, 0, 0, .05);
     margin: auto;
-
   }
 </style>
