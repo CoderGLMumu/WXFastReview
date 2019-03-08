@@ -5,7 +5,7 @@
     <!-- selectBtn -->
     <SelectBtn class="SelectBtn" @selectClick = 'updateSelectData' v-if="user_details.userName" />
     <!-- Art_contents -->
-    <Art_contents class="Art_contents" :selectIndex = selectIndex v-if="manuscript_passing" />
+    <Art_contents :selectIndex = selectIndex v-if="manuscript_passing" />
   </div>
 </template>
 
@@ -74,8 +74,5 @@
     /* position:fixed; */
   }
 
-  .Art_contents {
-    /* margin-top: .38rem; */
-    /* overflow: auto; */
-  }
+
 </style>

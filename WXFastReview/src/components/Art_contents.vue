@@ -1,7 +1,7 @@
 <template>
   <!-- Art_contents -->
-  <div >
-    <scroller :on-refresh="refresh" class="page-down listData" v-show="!selectIndex">
+  <div class="page-down">
+    <scroller :on-refresh="refresh" class="listData" v-show="!selectIndex" style="top: 5.333rem ;height:17.787rem;">
       <div v-for="(item,index) in manuscript_pending_review.items" :key="index" @click="$router.push({name:'Detail',params:item})">
 
         <div class="xh">{{ index + 1 }}</div>
@@ -15,7 +15,7 @@
       </div>
     </scroller>
 
-    <scroller :on-refresh="refresh" class="page-down listData" v-show="selectIndex">
+    <scroller :on-refresh="refresh" class="listData" v-show="selectIndex" style="top: 5.333rem;height:12.533rem;">
       <div v-for="(item,index) in manuscript_passing.items" :key="index" @click="$router.push({name:'Detail',params:item})">
 
         <div class="xh">{{ index + 1 }}</div>
@@ -81,7 +81,7 @@
             pageSize: 99,
             callback: () => {
               if (this.$refs.loadmore) {
-                debugger
+
                 this.$refs.loadmore.onTopLoaded();
               }
             }
@@ -93,13 +93,13 @@
             pageSize: 99,
             callback: () => {
               if (this.$refs.loadmore) {
-                debugger
+
                 this.$refs.loadmore.onTopLoaded();
               }
             }
           }
         }
-        debugger
+
         this.$store.dispatch('get_manuscript', Parameter)
       },
     }
@@ -107,31 +107,40 @@
 </script>
 
 <style>
+
   .page-down {
-    /* width: 100%;
-        height:100%; */
-    /* margin-top: 2.667rem; */
-     margin-top: 5.667rem;
+    height: 5.333rem;
+    background-color: rgb(255, 255, 255);
   }
 
-  .row {
+  /* .row {
     height: 150px;
     font-size: 16px;
     line-height: 30px;
     text-align: center;
     color: #444;
-    background-color: #fff;
+    background-color: rgb(107, 236, 32);
   }
 
   .grey-bg {
     background-color: #eee;
-  }
+  } */
 
-  .scrollerclass {
+  /* .scrollerclass {
     margin-top: 5rem;
+  } */
+
+  .listData {
+    line-height: 1rem;
+    flex-grow: 1;
+    margin-right: .8rem;
+    /* overflow: hidden; */
+    top: 14.8rem;
+    /* padding-bottom: 14.8rem; */
   }
 
   .listData .title {
+
     /* margin-bottom: .375rem; */
     font-size: 0.48rem;
     font-family: PingFangSC-Regular;
@@ -144,12 +153,7 @@
     margin-left: .833rem;
   }
 
-  .listData {
-    line-height: 1rem;
-    flex-grow: 1;
-    margin-right: .8rem;
-    overflow: hidden;
-  }
+
 
   .listData .des {
      margin-right: .466667rem;

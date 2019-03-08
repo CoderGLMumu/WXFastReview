@@ -31,7 +31,7 @@ export default function ajax (url, data={}, type='GET') {
     } else {
 
       // 发送post请求
-      debugger
+
       var qs = require('qs');
       // let params = {_method:'put'}
       // let methods = 'post'

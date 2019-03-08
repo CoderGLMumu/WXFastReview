@@ -51,7 +51,7 @@
             cancelButtonText:'点错了',
           }).then(action => {
             // console.log('11111111111');
-            debugger
+
             let manuscriptReview = {"pass":true,"special":false,"suggestion":"#","manuscriptId":this.$route.params.id}
             let isAuto = false
             this.$store.dispatch('get_review_manuscript',{manuscript:this.$route.params,manuscriptReview:manuscriptReview,isAuto:isAuto,callback:() => {
@@ -81,7 +81,7 @@
             cancelButtonText:'点错了'
           }).then(action => {
             // console.log('2222222222222222');
-            debugger
+
             let manuscriptReview = {"pass":false,"special":false,"suggestion":"#","manuscriptId":this.$route.params.id}
             let isAuto = false
             this.$store.dispatch('get_review_manuscript',{manuscript:this.$route.params,manuscriptReview:manuscriptReview,isAuto:isAuto,callback:() => {

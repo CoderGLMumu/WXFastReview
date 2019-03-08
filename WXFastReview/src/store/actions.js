@@ -47,7 +47,7 @@ export default {
     // 发送异步ajax请求
     const result = await req_review_count();
     // 提交一个mutation
-    debugger
+
     if (result.responseCode === 200) {
       const review_count = result.resultParm.resource
       commit(RECEIVE_REVIEW_COUNT, {review_count})
