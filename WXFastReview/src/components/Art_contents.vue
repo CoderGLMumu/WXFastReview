@@ -39,6 +39,7 @@
   import {
     mapState
   } from 'vuex'
+import { debug } from 'util';
   export default {
     data() {
       return {
@@ -72,7 +73,7 @@
     methods: {
 
       // 加载刷新数据
-      async refresh() {
+      async refresh(done) {
         let Parameter
         if (this.selectIndex == 0) {
           Parameter = {
@@ -80,11 +81,7 @@
             pageNo: 1,
             pageSize: 99,
             callback: () => {
-              if (this.$refs.loadmore) {
-
-                // this.$refs.loadmore.onTopLoaded();
-                done()
-              }
+              done()
             }
           }
         } else {
@@ -93,11 +90,7 @@
             pageNo: 1,
             pageSize: 99,
             callback: () => {
-              if (this.$refs.loadmore) {
-
-                // this.$refs.loadmore.onTopLoaded();
-                done()
-              }
+              done()
             }
           }
         }
