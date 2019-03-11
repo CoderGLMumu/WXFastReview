@@ -36,7 +36,7 @@
     },
     methods: {
       confirm(isconfirm) {
-           let msgbox=document.getElementsByClassName("mint-msgbox-message")[0];
+          let msgbox=document.getElementsByClassName("mint-msgbox-message")[0];
           let innerTitle1=document.getElementsByClassName("innerTitle")[0];
           let innerTitle2=document.getElementsByClassName("innerTitle")[1];
           if (innerTitle1) {
@@ -124,7 +124,7 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style >
   .container {
     position: relative;
     /* overflow: hidden;
@@ -161,27 +161,24 @@
     /*隐藏滚轮*/
   }
 
-  .container  .detailcontent {
-
-    width: 8.513333rem;
-    /* height: 527px; */
+ .container .detailcontent {
     font-size: .433333rem;
     font-family: PingFangSC-Regular;
     font-weight: 400;
     color: rgb(134, 134, 134);
-    /* line-height: .8rem; */
     margin-top: .6rem;
     margin-left: .8rem;
+    margin-right: .8rem;
     line-height: .9rem;
     height: 17.786667rem;
-    /* bottom: .266667rem; */
     text-align: left;
-    /* height: 4rem; */
   }
-  .container  .detailcontent
-  {
+  /* .container .detailcontent img {
+    float: left;
+    width: 50%;
+    height: 50%;
+  } */
 
-  }
 
   .fl {
     float: left;
@@ -228,6 +225,11 @@
     line-height: 1.28rem;
     z-index: 99;
   }
+
+  .detailcontent img{
+    width: 8.2rem;
+  }
+
 
 
 </style>

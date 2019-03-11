@@ -1,7 +1,7 @@
 <template>
   <!-- Art_contents -->
   <div class="page-down">
-    <scroller :on-refresh="refresh" class="listData" v-show="!selectIndex" style="top: 5.333rem ;height:17.787rem;">
+    <scroller :on-refresh="refresh" class="listData" v-if="manuscript_pending_review" v-show="!selectIndex"  height="67%" style="top: 5.333rem ">
       <div v-for="(item,index) in manuscript_pending_review.items" :key="index" @click="$router.push({name:'Detail',params:item})">
 
         <div class="xh">{{ index + 1 }}</div>
@@ -15,7 +15,7 @@
       </div>
     </scroller>
 
-    <scroller :on-refresh="refresh" class="listData" v-show="selectIndex" style="top: 5.333rem;height:12.533rem;">
+    <scroller :on-refresh="refresh" class="listData" v-if="manuscript_passing" v-show="selectIndex" height="67%" style="top: 5.333rem">
       <div v-for="(item,index) in manuscript_passing.items" :key="index" @click="$router.push({name:'Detail',params:item})">
 
         <div class="xh">{{ index + 1 }}</div>
@@ -50,7 +50,7 @@
     },
     mounted() {
 
-      this.refresh()
+      // this.refresh()
 
     },
 
@@ -82,7 +82,8 @@
             callback: () => {
               if (this.$refs.loadmore) {
 
-                this.$refs.loadmore.onTopLoaded();
+                // this.$refs.loadmore.onTopLoaded();
+                done()
               }
             }
           }
@@ -94,12 +95,12 @@
             callback: () => {
               if (this.$refs.loadmore) {
 
-                this.$refs.loadmore.onTopLoaded();
+                // this.$refs.loadmore.onTopLoaded();
+                done()
               }
             }
           }
         }
-
         this.$store.dispatch('get_manuscript', Parameter)
       },
     }
@@ -109,7 +110,7 @@
 <style>
 
   .page-down {
-    height: 5.333rem;
+    height: 9.88rem;
     background-color: rgb(255, 255, 255);
   }
 
@@ -156,7 +157,7 @@
 
 
   .listData .des {
-     margin-right: .466667rem;
+    margin-right: .466667rem;
         /* width: 7.466667rem; */
   }
 

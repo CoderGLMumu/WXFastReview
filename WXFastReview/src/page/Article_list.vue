@@ -47,12 +47,22 @@
      ...mapState(['user_details','manuscript_pending_review','manuscript_passing'])
     },
     mounted () {
-      this.$store.dispatch('getslogo').then(this.$store.dispatch('getuser_details'))
-      .then(this.$store.dispatch('get_review_count'))
-      let Parameter1 = {selectIndex : 0,pageNo:1,pageSize:99,callback:() =>{}}
-      let Parameter2 = {selectIndex : 1,pageNo:1,pageSize:99,callback:() =>{}}
-      this.$store.dispatch('get_manuscript',Parameter1)
-      this.$store.dispatch('get_manuscript',Parameter2)
+      // this.$store.dispatch('getslogo').then(this.$store.dispatch('getuser_details'))
+      // .then(this.$store.dispatch('get_review_count'))
+      this.$store.dispatch('getslogo').then(res => {
+        this.$store.dispatch('getuser_details').then(res => {
+          this.$store.dispatch('get_review_count')
+          let Parameter1 = {selectIndex : 0,pageNo:1,pageSize:99,callback:() =>{}}
+          let Parameter2 = {selectIndex : 1,pageNo:1,pageSize:99,callback:() =>{}}
+          this.$store.dispatch('get_manuscript',Parameter1)
+          this.$store.dispatch('get_manuscript',Parameter2)
+        }).catch(err => {
+          console.log(err);
+        })
+      }).catch(err => {
+        console.log(err);
+      })
+
     },
   }
 </script>
