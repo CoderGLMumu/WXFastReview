@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="nav">
+    <div class="nav" v-if="from_contontinitpage">
       <!-- SelectBtn -->
       <div class="leftL" @click="leftLClick" :class=" selectIndex ? 'noselected' : 'selected' ">待审核
-        <mt-badge class="badgeclass" type="error" color="#6665FF" v-if="manuscript_pending_review.items" >{{manuscript_pending_review.items.length}}</mt-badge>
+        <mt-badge class="badgeclass" type="error" color="#6665FF" v-if="manuscript_pending_review.items" >{{manuscript_pending_review.totalNum}}</mt-badge>
       </div>
 <!-- manuscript.items.length -->
       <div class="leftR" @click="leftRClick" :class=" selectIndex ? 'selected' : 'noselected' ">已审核</div>
@@ -30,6 +30,10 @@
         badgeNum: 'ces',
         selectIndex: 0,
       }
+    },
+
+    props: {
+      from_contontinitpage:Number,
     },
 
     components: {

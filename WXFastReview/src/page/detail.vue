@@ -1,5 +1,5 @@
 <template>
-  <div class='container word-wrap'>
+  <div class='container word-wrap' v-show="initpage == -1">
     <div class="scroll">
       <div class='detail-title fl'>
         {{writing_manuscript.title}}
@@ -28,7 +28,8 @@
     name: 'Article_list',
     data() {
       return {
-        key: String
+        key: String,
+        initpage:Number,
       }
     },
     components: {
@@ -50,7 +51,6 @@
             confirmButtonText:'确认',
             cancelButtonText:'点错了',
           }).then(action => {
-            // console.log('11111111111');
 
             let manuscriptReview = {"pass":true,"special":false,"suggestion":"#","manuscriptId":this.$route.params.id}
             let isAuto = false
@@ -80,7 +80,6 @@
             confirmButtonText:'确认',
             cancelButtonText:'点错了'
           }).then(action => {
-            // console.log('2222222222222222');
 
             let manuscriptReview = {"pass":false,"special":false,"suggestion":"#","manuscriptId":this.$route.params.id}
             let isAuto = false
@@ -112,10 +111,10 @@
     },
 
       mounted() {
-
-        // this.$route.params
-
-        this.$store.dispatch('get_writing_manuscript',this.$route.params.id)
+        this.$store.dispatch('get_writing_manuscript',this.$route.params.id).then(
+        res => {
+          this.initpage = -1;
+        })
       },
       computed: {
         ...mapState(['writing_manuscript'])
@@ -148,7 +147,7 @@
     margin-top: .586667rem;
     margin-left: .8rem;
     margin-right: .8rem;
-
+    min-width: 8rem;
   }
 
   .word-wrap{

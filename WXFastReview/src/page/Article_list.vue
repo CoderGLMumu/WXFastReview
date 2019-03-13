@@ -3,9 +3,9 @@
     <!-- userInfo -->
     <UserInfo class="UserInfo" v-if="user_details.userName" />
     <!-- selectBtn -->
-    <SelectBtn class="SelectBtn" @selectClick = 'updateSelectData' v-if="user_details.userName" />
+    <SelectBtn class="SelectBtn" :from_contontinitpage = from_contontinitpage @selectClick = 'updateSelectData' v-if="user_details.userName" />
     <!-- Art_contents -->
-    <Art_contents :selectIndex = selectIndex v-if="manuscript_passing" />
+    <Art_contents @contontinitpage = 'contontinitpage' :selectIndex = selectIndex v-if="manuscript_passing" />
   </div>
 </template>
 
@@ -29,12 +29,17 @@
     data() {
       return {
         selectIndex: 0,
+        from_contontinitpage: 0,
       }
     },
     methods: {
       updateSelectData(selectIndex){
         this.selectIndex = selectIndex;
-      }
+      },
+      contontinitpage(contontinitpage){
+        debugger
+        this.from_contontinitpage =  contontinitpage;
+      },
     },
     // mounted() {
     //   // this.getslogo();
@@ -44,7 +49,7 @@
     //   // this.req_simulated_logo();
     // },
     computed: {
-     ...mapState(['user_details','manuscript_pending_review','manuscript_passing'])
+      ...mapState(['user_details','manuscript_pending_review','manuscript_passing'])
     },
     mounted () {
       // this.$store.dispatch('getslogo').then(this.$store.dispatch('getuser_details'))

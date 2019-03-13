@@ -28,7 +28,7 @@ export default {
     const result = await req_simulated_logo();
     // 提交一个mutation
     if (result.responseCode === 200) {
-     console.log('异步模拟登陆')
+    // console.log('异步模拟登陆')
     }
   },
 
@@ -40,7 +40,7 @@ export default {
     if (result.responseCode === 200) {
       const user_details = result.resultParm.resource
       commit(RECEIVE_USER_DETAILS, {user_details})
-      console.log('用户信息')
+      // console.log('用户信息')
     }
   },
 
@@ -52,7 +52,7 @@ export default {
     if (result.responseCode === 200) {
       const review_count = result.resultParm.resource
       commit(RECEIVE_REVIEW_COUNT, {review_count})
-      console.log('用户信息2')
+      // console.log('用户信息2')
     }
   },
 
@@ -77,14 +77,14 @@ export default {
       if (Parameter.selectIndex == 0) {
         const manuscript_pending_review = result.resultParm.resource
         commit(RECEIVE_MANUSCRIPT_PENDING_REVIEW, {manuscript_pending_review})
-        Parameter.callback && Parameter.callback()
-        console.log('未审核list')
+        Parameter.callback && Parameter.callback(manuscript_pending_review)
+        // console.log('未审核list')
       }
       if (Parameter.selectIndex == 1) {
         const manuscript_passing = result.resultParm.resource
         commit(RECEIVE_MANUSCRIPT_PASSING, {manuscript_passing})
-        Parameter.callback && Parameter.callback()
-        console.log('已审核list')
+        Parameter.callback && Parameter.callback(manuscript_passing)
+        // console.log('已审核list')
       }
 
       // 数据更新了, 通知一下组件
@@ -99,19 +99,6 @@ export default {
 
       const writing_manuscript = result.resultParm.resource
       commit(RECEIVE_WRITING_MANUSCRIPT, {writing_manuscript})
-    }
-
-  },
-
-  async get_review_manuscript2({commit, state},{manuscript, manuscriptReview,isAuto,callback}) {
-
-    const result = await req_review_manuscript(manuscript, manuscriptReview,isAuto)
-    if (result.responseCode === 200) {
-
-      const review_manuscript = result.resultParm.resource
-      commit(RECEIVE_REVIEW_MANUSCRIPT, {review_manuscript})
-      // 通知一下组件
-      callback && callback()
     }
 
   },
